@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --tj-bg: 248 250 252;
+  --tj-surface: 255 255 255;
+  --tj-ink: 15 23 42;
+  --tj-muted: 100 116 139;
+  --tj-primary: 15 23 42;
+  --tj-primary-dark: 30 41 59;
+  --tj-accent: 199 168 106;
+  --tj-border: 241 245 249;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-family: 'Tajawal', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background-color: rgb(var(--tj-bg));
+  color: rgb(var(--tj-ink));
+  margin: 0;
+}
+
+[dir='rtl'] {
+  text-align: right;
+}
+
+[dir='ltr'] {
+  text-align: left;
+}
+
+@layer components {
+  .tj-card {
+    @apply bg-white rounded-2xl border border-slate-100 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1px_2px_rgba(0,0,0,0.03)];
+  }
+  .tj-card-flat {
+    @apply bg-white rounded-2xl border border-slate-100;
+  }
+  .tj-input {
+    @apply w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 outline-none transition focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10;
+  }
+  .tj-label {
+    @apply block text-sm font-semibold text-slate-600 mb-1.5;
+  }
+  .tj-btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl font-bold transition active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .tj-btn-primary {
+    @apply tj-btn bg-slate-900 text-white px-5 py-3 hover:bg-slate-800;
+  }
+  .tj-btn-ghost {
+    @apply tj-btn bg-slate-100 text-slate-600 px-4 py-2.5 hover:bg-slate-200;
+  }
+  .tj-btn-outline {
+    @apply tj-btn border border-slate-200 bg-white text-slate-700 px-4 py-2.5 hover:border-slate-400 hover:text-slate-900;
+  }
+  .tj-chip {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold;
+  }
+  .tj-section-title {
+    @apply text-lg font-extrabold text-slate-900 tracking-tight;
+  }
+}
+
+@keyframes tj-pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(15, 23, 42, 0.2); }
+  70% { box-shadow: 0 0 0 12px rgba(15, 23, 42, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(15, 23, 42, 0); }
+}
+.tj-pulse {
+  animation: tj-pulse-ring 2s infinite;
+}
+
+@keyframes tj-fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.tj-fade-up {
+  animation: tj-fade-up 0.4s ease-out both;
+}
+
+@keyframes tj-slide-in {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.tj-slide-in {
+  animation: tj-slide-in 0.3s ease-out both;
+}
+
+@keyframes tj-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.tj-fade-in {
+  animation: tj-fade-in 0.2s ease-out both;
+}
+
+@keyframes tj-splash-fade {
+  from { opacity: 1; }
+  to { opacity: 0; visibility: hidden; }
+}
+.tj-splash-out {
+  animation: tj-splash-fade 0.5s ease-in forwards;
+}
+
+@keyframes tj-carousel-scroll {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.tj-carousel-anim {
+  animation: tj-carousel-scroll 0.5s ease-out both;
+}
+
+.tj-scroll-hide::-webkit-scrollbar { display: none; }
+.tj-scroll-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+html { scroll-behavior: smooth; }
+body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+/* Thin scrollbar for chat panels */
+.tj-chat-scroll::-webkit-scrollbar { width: 4px; }
+.tj-chat-scroll::-webkit-scrollbar-track { background: transparent; }
+.tj-chat-scroll::-webkit-scrollbar-thumb { background: rgb(203 213 225); border-radius: 2px; }
+
+/* Safe-area aware floating button */
+.tj-fab {
+  bottom: calc(1.5rem + env(safe-area-inset-bottom));
+}
+
+/* Prevent text size adjust on orientation change */
+html { -webkit-text-size-adjust: 100%; }
