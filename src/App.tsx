@@ -10,7 +10,7 @@ import { AdminApp } from '@/components/admin/AdminApp';
 import { SplashScreen } from '@/components/SplashScreen';
 
 function AppRouter() {
-  const { mode } = useAppMode();
+  const { mode }  = useAppMode();
   const { session, profile, loading } = useAuth();
 
   if (loading) {
@@ -25,7 +25,6 @@ function AppRouter() {
     return <AuthScreen />;
   }
 
-  // Guard: provider/admin modes require the matching role; otherwise show customer app.
   if (mode === 'provider' && profile.role !== 'provider' && profile.role !== 'admin') {
     return <RoleMismatch mode="provider" current={profile.role} />;
   }
