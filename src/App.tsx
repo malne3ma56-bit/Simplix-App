@@ -1,4 +1,4 @@
-import React, { useState, Component, ErrorInfo, ReactNode } from 'react';
+import { useState } from 'react';
 import { LangProvider } from '@/context/LangContext';
 import { AppModeProvider, useAppMode } from '@/context/AppModeContext';
 import { AuthProvider, useAuth } from '@/context/AuthContext';
@@ -9,35 +9,8 @@ import { ProviderApp } from '@/components/provider/ProviderApp';
 import { AdminApp } from '@/components/admin/AdminApp';
 import { SplashScreen } from '@/components/SplashScreen';
 
-// مكون لاكتشاف الأخطاء وعرضها على الشاشة مباشرة بدلاً من الشاشة البيضاء
-class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean; error: Error | null }> {
-  state = { hasError: false, error: null };
-
-  static getDerivedStateFromError(error: Error) {
-    return { hasError: true, error };
-  }
-
-  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error("ErrorBoundary caught an error", error, errorInfo);
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return (
-        <div style={{ padding: '30px', background: '#fee2e2', color: '#991b1b', minHeight: '100vh', direction: 'ltr', fontFamily: 'monospace' }}>
-          <h2 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '10px' }}>⚠️ App Runtime Error:</h2>
-          <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word', background: '#fff', padding: '15px', borderRadius: '8px' }}>
-            {this.state.error?.toString()}
-          </pre>
-        </div>
-      );
-    }
-    return this.props.children;
-  }
-}
-
 function AppRouter() {
-  const { mode } = useAppMode();
+  const { mode }  = useAppMode();
   const { session, profile, loading } = useAuth();
 
   if (loading) {
@@ -87,15 +60,13 @@ export default function App() {
   const [showSplash, setShowSplash] = useState(true);
 
   return (
-    <ErrorBoundary>
-      <LangProvider>
-        <AuthProvider>
-          <AppModeProvider>
-            {showSplash && <SplashScreen onFinish={() => setShowSplash(false)} />}
-            <AppRouter />
-          </AppModeProvider>
-        </AuthProvider>
-      </LangProvider>
-    </ErrorBoundary>
+    <LangProvider>
+      <AuthProvider>
+        <AppModeProvider>
+          {showSplash && <SplashScreen onFinish={() => setShowSplash(false)} />}
+          <AppRouter />
+        </AppModeProvider>
+      </AuthProvider>
+    </LangProvider>
   );
 }
