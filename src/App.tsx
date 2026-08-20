@@ -1,4 +1,4 @@
-import { useState } from 'react';
+        import { useState } from 'react';
 import { LangProvider } from '@/context/LangContext';
 import { AppModeProvider, useAppMode } from '@/context/AppModeContext';
 import { AuthProvider, useAuth } from '@/context/AuthContext';
@@ -66,6 +66,11 @@ export default function App() {
         <AppModeProvider>
           {showSplash && <SplashScreen onFinish={() => setShowSplash(false)} />}
           <AppRouter />
+        </AppModeProvider>
+      </AuthProvider>
+    </LangProvider>
+  );
+}  <AppRouter />
         </AppModeProvider>
       </AuthProvider>
     </LangProvider>
