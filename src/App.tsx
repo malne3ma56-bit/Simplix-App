@@ -1,4 +1,4 @@
-        import { useState } from 'react';
+import { useState } from 'react';
 import { LangProvider } from '@/context/LangContext';
 import { AppModeProvider, useAppMode } from '@/context/AppModeContext';
 import { AuthProvider, useAuth } from '@/context/AuthContext';
@@ -70,4 +70,4 @@ export default function App() {
       </AuthProvider>
     </LangProvider>
   );
-}  
+}
