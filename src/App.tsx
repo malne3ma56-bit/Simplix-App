@@ -70,9 +70,4 @@ export default function App() {
       </AuthProvider>
     </LangProvider>
   );
-}  <AppRouter />
-        </AppModeProvider>
-      </AuthProvider>
-    </LangProvider>
-  );
-}
+}  
